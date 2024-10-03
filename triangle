@@ -1,0 +1,68 @@
+#include <iostream>
+#include<conio.h>
+
+using namespace std;
+
+#include <iostream>
+#include<conio.h>
+using namespace std;
+
+int leer_n() {
+    int n;
+    do {
+        cout << "Ingrese un numero: ";
+        cin >> n;
+        if (n < 3 || n > 10) {
+            cout << "ERROR: debe ingresar un valor entre 3 y 10" << endl;
+        }
+    } while (n < 3 || n > 10); //bucle que se repite hasta que el usuario ingrese un numero valido
+    return n;
+}
+
+void dibujar_triangulo(int numero_seccion, int espacios) {
+    
+    for (int i = 1; i <= 4; i++) { //bucle para las 4 filas del triangulo
+        
+        for (int j = 0; j < espacios; j++) { //imprime los espacios iniciales para posicionar el triangulo
+            cout << "  ";
+        }
+
+        for (int j = 1; j <= 4; j++) { //bucle para las 4 columnas del triangulo
+            if (i == 3 && j == 2) { //condicion para imprimir el numero de seccion
+                if (numero_seccion < 10) cout << " "; //anade un espacio extra si el numero es de un solo digito
+                cout << numero_seccion << " ";
+            }
+        
+            else if (j <= i) { //condicion para imprimir asteriscos formando el triangulo
+                cout << "* ";
+            }
+            
+            else { //imprime espacios para completar la matriz 4x4
+                cout << "  ";
+            }
+        }
+        cout << endl; //salto de linea al final de cada fila del triangulo
+    }
+}
+
+void dibujar_fila_triangulos(int n, int fila) {
+    int espacios_iniciales = 0;
+    for (int i = 1; i <= fila; i++) { //bucle para dibujar los triangulos de la fila actual
+        dibujar_triangulo(fila, espacios_iniciales);
+        espacios_iniciales += 4;  //se incrementan 4 espacios para el siguiente triangulo
+    }
+    cout << endl; //salto de linea al final de cada fila de triangulos
+}
+
+int main() {
+    int n = leer_n(); //lee el numero ingresado por el usuario
+    for (int i = 1; i <= n; i++) { //bucle para dibujar todas las filas de triangulos
+        dibujar_fila_triangulos(n, i);
+    }
+    _getch();
+    return 0;
+}
+
+
+
+
